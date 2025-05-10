@@ -1,16 +1,22 @@
 
 async function getData() {
         // first call
-    const userData = await fetch("https://jsonplaceholder.typicode.com/users"); // 180ms
-    const userJson = await userData.json(); // 0
-        // second call
-    const photoData = await fetch("https://jsonplaceholder.typicode.com/photos");
-    const photoJson = await photoData.json();
+    const getApiResponse = await fetch("http://localhost:8080/get-api", {
+        method: "GET",
+    }); // 180ms
+    const getApiData = await getApiResponse.json(); // 0
 
-    return {
-        userData: userJson,
-        photoData: photoJson
-    }
+    const postApiResponse = await fetch("http://localhost:8080/post-api", {
+        method: "POST",
+        body: JSON.stringify({
+            name: "John Doe",
+            age: 30,
+        }),
+        headers: { "Content-Type": "application/json"},
+    }); // 200ms
+    const postApiData = await postApiResponse.json();
+
+    return { getApiData,  postApiData};
 }
 
 getData().then(res=>{
@@ -24,3 +30,10 @@ getData().then(res=>{
 // async vs sync // parralel execution and one by one exceution
 // callback hell
 // async await
+// list of request method & its use
+
+// GET to get data from server
+// POST to send data to server
+// PUT to update data on server
+// DELETE to delete data from server
+// PATCH to partially update data on server

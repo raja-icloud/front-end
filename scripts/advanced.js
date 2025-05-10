@@ -1,39 +1,74 @@
-
-async function getData() {
-        // first call
-    const getApiResponse = await fetch("http://localhost:8080/get-api", {
-        method: "GET",
-    }); // 180ms
-    const getApiData = await getApiResponse.json(); // 0
-
-    const postApiResponse = await fetch("http://localhost:8080/post-api", {
-        method: "POST",
-        body: JSON.stringify({
-            name: "John Doe",
-            age: 30,
-        }),
-        headers: { "Content-Type": "application/json"},
-    }); // 200ms
-    const postApiData = await postApiResponse.json();
-
-    return { getApiData,  postApiData};
-}
-
-getData().then(res=>{
-    console.log("two api response", res);
-}).catch((error) => {
-    console.error(error);
-});
+const app = document.getElementById("app");
 
 
+fetch("https://jsonplaceholder.typicode.com/users")
+  .then((response) => response.json())
+  .then((data) => {
+    const table = `
+      <table border="1" cellpadding="5" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Website</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${data.map((user) => {
+            return `
+              <tr>
+                <td>${user.name}</td>
+                <td>${user.email}</td>
+                <td>${user.phone}</td>
+                <td>${user.website}</td>
+                <td>
+                  <button onclick="alert('User Name: ${user.name}')">View</button>
+                </td>
+              </tr>
+            `;
+          }).join("")}
+        </tbody>
+      </table>
+    `;
+    app.innerHTML = table;
+  })
 
-// async vs sync // parralel execution and one by one exceution
-// callback hell
-// async await
-// list of request method & its use
 
-// GET to get data from server
-// POST to send data to server
-// PUT to update data on server
-// DELETE to delete data from server
-// PATCH to partially update data on server
+  // array method, 
+  // string method,
+  // object method,
+  // window method,
+  // document method,
+  // event method,
+  // fetch method,
+  // promise method,
+  // async/await method,
+  // localStorage method,
+  // sessionStorage method,
+  // cookie method,
+  // regex method,
+  // math method,
+  // date method,
+  // json method,
+  // dom
+
+
+
+  // const arr = [1, 2, 3, 4, 5];
+  const expected = arr.find(e=>i==3) // 3
+
+  // List<string> arr = new List<string>();
+    // arr.Add("1");
+    // arr.Add("2");
+    // arr.Add("3");
+    // arr.Add("4");
+// Integer exptec = arr.stream().filter((e) => e == 3).collect(); // 3
+
+// const user = {name: "John", email: "john@mail.com"}
+
+// Map<string, string> user = new Map<string, string>();
+// user.set("name", "John");
+// user.set("email", "john@mail.com");
+
